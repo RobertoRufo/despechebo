@@ -1,33 +1,113 @@
-function FlightLeg({ from, to, flight, aircraft, time, date, terminal }: {
-  from: string; to: string; flight: string; aircraft: string;
-  time: string; date: string; terminal?: string;
-}) {
+interface Leg {
+  from: string;
+  fromCity: string;
+  to: string;
+  toCity: string;
+  flight: string;
+  aircraft: string;
+  departs: string;
+  arrives: string;
+  departDate: string;
+  arriveDate: string;
+  duration: string;
+  departTerminal?: string;
+  arriveTerminal?: string;
+}
+
+interface Lounge {
+  name: string;
+  access: string;
+  note: string;
+  accessible: boolean;
+}
+
+interface FlightCardProps {
+  direction: string;
+  route: string;
+  totalDuration: string;
+  legs: Leg[];
+  layoverDuration: string;
+  layoverAirport: string;
+  lounges: Lounge[];
+}
+
+function LegCard({ leg, isFirst }: { leg: Leg; isFirst: boolean }) {
   return (
-    <div className="flex items-center gap-3 py-2">
-      <div className="text-center min-w-[48px]">
-        <p className="font-bold text-foreground text-base">{from}</p>
+    <div className="bg-background/50 rounded-xl p-4 border border-border/60">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-xs font-bold text-primary uppercase tracking-wider">{leg.flight}</span>
+        <span className="text-xs text-muted-foreground">{leg.aircraft}</span>
       </div>
-      <div className="flex-1 flex items-center gap-2">
-        <div className="h-px flex-1 bg-border" />
-        <div className="text-center">
-          <p className="text-xs font-bold text-primary">{flight}</p>
-          <p className="text-xs text-muted-foreground">{aircraft}</p>
+      <div className="flex items-center justify-between gap-2">
+        {/* Departure */}
+        <div className="text-left">
+          <div className="flex items-center gap-1.5 mb-0.5">
+            <span className="text-lg">{isFirst ? "🛫" : "🛫"}</span>
+            <span className="font-bold text-foreground text-xl">{leg.departs}</span>
+          </div>
+          <p className="text-xs text-muted-foreground">{leg.departDate}</p>
+          <p className="font-semibold text-foreground text-sm">{leg.from}</p>
+          <p className="text-xs text-muted-foreground">{leg.fromCity}</p>
+          {leg.departTerminal && <p className="text-xs text-muted-foreground/70">{leg.departTerminal}</p>}
         </div>
-        <div className="h-px flex-1 bg-border" />
-      </div>
-      <div className="text-center min-w-[48px]">
-        <p className="font-bold text-foreground text-base">{to}</p>
+
+        {/* Duration arrow */}
+        <div className="flex-1 flex flex-col items-center px-2">
+          <span className="text-xs text-muted-foreground mb-1">{leg.duration}</span>
+          <div className="w-full flex items-center gap-1">
+            <div className="flex-1 h-px bg-border" />
+            <span className="text-primary text-xs">✈</span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+        </div>
+
+        {/* Arrival */}
+        <div className="text-right">
+          <div className="flex items-center gap-1.5 mb-0.5 justify-end">
+            <span className="font-bold text-primary text-xl">{leg.arrives}</span>
+            <span className="text-lg">🛬</span>
+          </div>
+          <p className="text-xs text-muted-foreground">{leg.arriveDate}</p>
+          <p className="font-semibold text-foreground text-sm">{leg.to}</p>
+          <p className="text-xs text-muted-foreground">{leg.toCity}</p>
+          {leg.arriveTerminal && <p className="text-xs text-muted-foreground/70">{leg.arriveTerminal}</p>}
+        </div>
       </div>
     </div>
   );
 }
 
-function FlightCard({ direction, route, legs, departs, arrives, departDate, arriveDate, duration, departTerminal, arriveTerminal }: {
-  direction: string; route: string;
-  legs: { from: string; to: string; flight: string; aircraft: string }[];
-  departs: string; arrives: string; departDate: string; arriveDate: string;
-  duration: string; departTerminal?: string; arriveTerminal?: string;
-}) {
+function LayoverBadge({ duration, airport, lounges }: { duration: string; airport: string; lounges: Lounge[] }) {
+  return (
+    <div className="relative flex flex-col items-center my-1">
+      <div className="w-px h-3 bg-border" />
+      <div className="bg-card border border-border rounded-xl px-4 py-2 w-full">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2">
+            <span className="text-sm">🔄</span>
+            <span className="text-xs font-semibold text-foreground">Layover at {airport}</span>
+          </div>
+          <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">{duration}</span>
+        </div>
+        <div className="space-y-1.5">
+          {lounges.map((lounge, i) => (
+            <div key={i} className={`flex items-start gap-2 text-xs rounded-lg px-2 py-1.5 ${lounge.accessible ? 'bg-green-500/10 border border-green-500/20' : 'bg-secondary/50 border border-border/40'}`}>
+              <span className="mt-0.5 flex-shrink-0">{lounge.accessible ? '✅' : '⚠️'}</span>
+              <div>
+                <span className={`font-semibold ${lounge.accessible ? 'text-green-400' : 'text-muted-foreground'}`}>{lounge.name}</span>
+                <span className="text-muted-foreground"> · {lounge.access}</span>
+                {lounge.note && <p className="text-muted-foreground/70 mt-0.5">{lounge.note}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="w-px h-3 bg-border" />
+    </div>
+  );
+}
+
+function FlightCard({ direction, route, totalDuration, legs, layoverDuration, layoverAirport, lounges }: FlightCardProps) {
   return (
     <div className="bg-card border border-border rounded-2xl overflow-hidden">
       <div className="bg-gradient-to-r from-primary/10 to-card px-5 py-3 border-b border-border flex items-center justify-between">
@@ -36,83 +116,141 @@ function FlightCard({ direction, route, legs, departs, arrives, departDate, arri
           <p className="font-display font-bold text-lg text-foreground">{route}</p>
         </div>
         <div className="text-right">
-          <p className="text-xs text-muted-foreground">Duration</p>
-          <p className="font-semibold text-primary text-sm">{duration}</p>
+          <p className="text-xs text-muted-foreground">Total Duration</p>
+          <p className="font-semibold text-primary text-sm">{totalDuration}</p>
         </div>
       </div>
-      <div className="px-5 py-4 space-y-1">
-        {/* Depart / Arrive */}
-        <div className="flex justify-between items-start mb-3">
-          <div>
-            <p className="text-2xl font-bold text-foreground">{departs}</p>
-            <p className="text-xs text-muted-foreground">{departDate}</p>
-            {departTerminal && <p className="text-xs text-muted-foreground">{departTerminal}</p>}
-          </div>
-          <div className="flex flex-col items-center px-4">
-            <span className="text-xl">✈️</span>
-            <div className="h-px w-16 bg-border mt-1" />
-          </div>
-          <div className="text-right">
-            <p className="text-2xl font-bold text-primary">{arrives}</p>
-            <p className="text-xs text-muted-foreground">{arriveDate}</p>
-            {arriveTerminal && <p className="text-xs text-muted-foreground">{arriveTerminal}</p>}
-          </div>
-        </div>
-        {/* Legs */}
-        <div className="border-t border-border pt-3 space-y-1">
-          {legs.map((leg, i) => (
-            <FlightLeg key={i} {...leg} time="" date="" />
-          ))}
-        </div>
-        <p className="text-xs text-muted-foreground pt-1">✦ Delta · Layover included · Plane change</p>
+      <div className="px-4 py-4 space-y-1">
+        <LegCard leg={legs[0]} isFirst={true} />
+        <LayoverBadge duration={layoverDuration} airport={layoverAirport} lounges={lounges} />
+        <LegCard leg={legs[1]} isFirst={false} />
+      </div>
+      <div className="px-4 pb-4">
+        <p className="text-xs text-muted-foreground">Delta Air Lines · Delta Main Basic (E) · Plane change at {layoverAirport}</p>
       </div>
     </div>
   );
 }
+
+const ATL_LOUNGES_OUTBOUND: Lounge[] = [
+  {
+    name: "Delta Sky Club (ATL)",
+    access: "Not accessible",
+    note: "Delta Main Basic fare does not include Sky Club access.",
+    accessible: false,
+  },
+  {
+    name: "Centurion Lounge ATL",
+    access: "Amex Platinum / Centurion card",
+    note: "International Terminal, Concourse F. Open to cardholders + 2 guests.",
+    accessible: true,
+  },
+  {
+    name: "The Club ATL",
+    access: "Priority Pass / $45 day pass",
+    note: "Domestic Terminal South. 1h 27m layover — enough time to grab a drink.",
+    accessible: true,
+  },
+];
+
+const ATL_LOUNGES_RETURN: Lounge[] = [
+  {
+    name: "Delta Sky Club (ATL)",
+    access: "Not accessible",
+    note: "Delta Main Basic fare does not include Sky Club access.",
+    accessible: false,
+  },
+  {
+    name: "Centurion Lounge ATL",
+    access: "Amex Platinum / Centurion card",
+    note: "International Terminal, Concourse F. 1h 45m layover — comfortable connection.",
+    accessible: true,
+  },
+  {
+    name: "The Club ATL",
+    access: "Priority Pass / $45 day pass",
+    note: "Domestic Terminal South. Good option if you have Priority Pass.",
+    accessible: true,
+  },
+];
 
 export default function FlightsSection() {
   return (
     <section className="py-16 px-4 bg-secondary/20">
       <div className="max-w-3xl mx-auto">
         <h2 className="font-display text-3xl md:text-4xl font-bold text-gold-gradient mb-2">Flights</h2>
-        <p className="text-muted-foreground text-sm mb-8">Delta Air Lines · Austin ↔ Madrid</p>
+        <p className="text-muted-foreground text-sm mb-8">Delta Air Lines · Austin ↔ Madrid · All times local</p>
 
-        <div className="space-y-5">
+        <div className="space-y-6">
           <FlightCard
             direction="Outbound"
             route="AUS → ATL → MAD"
-            departs="5:06 PM"
-            arrives="12:15 PM"
-            departDate="Tue, April 28"
-            arriveDate="Wed, April 29"
-            duration="12h 9m"
-            departTerminal="Austin-Bergstrom (AUS)"
-            arriveTerminal="Madrid T1 (MAD)"
+            totalDuration="12h 9m"
+            layoverDuration="1h 27m"
+            layoverAirport="ATL"
+            lounges={ATL_LOUNGES_OUTBOUND}
             legs={[
-              { from: "AUS", to: "ATL", flight: "DL1397", aircraft: "Airbus A321neo" },
-              { from: "ATL", to: "MAD", flight: "DL0108", aircraft: "Airbus A330-300" },
+              {
+                from: "AUS", fromCity: "Austin, TX",
+                to: "ATL", toCity: "Atlanta, GA",
+                flight: "DL1397", aircraft: "Airbus A321neo",
+                departs: "5:06 PM", arrives: "8:28 PM",
+                departDate: "Tue, Apr 28", arriveDate: "Tue, Apr 28",
+                duration: "2h 22m",
+                departTerminal: "Terminal TBD",
+                arriveTerminal: "Domestic Term-South",
+              },
+              {
+                from: "ATL", fromCity: "Atlanta, GA",
+                to: "MAD", toCity: "Madrid, Spain",
+                flight: "DL0108", aircraft: "Airbus A330-300",
+                departs: "9:55 PM", arrives: "12:15 PM",
+                departDate: "Tue, Apr 28", arriveDate: "Wed, Apr 29",
+                duration: "8h 20m",
+                departTerminal: "International Term",
+                arriveTerminal: "Terminal 1",
+              },
             ]}
           />
+
           <FlightCard
             direction="Return"
             route="MAD → ATL → AUS"
-            departs="12:45 PM"
-            arrives="7:46 PM"
-            departDate="Wed, May 6"
-            arriveDate="Wed, May 6"
-            duration="14h 1m"
-            departTerminal="Madrid T1 (MAD)"
-            arriveTerminal="Austin-Bergstrom (AUS)"
+            totalDuration="14h 1m"
+            layoverDuration="1h 45m"
+            layoverAirport="ATL"
+            lounges={ATL_LOUNGES_RETURN}
             legs={[
-              { from: "MAD", to: "ATL", flight: "DL0109", aircraft: "Airbus A330-300" },
-              { from: "ATL", to: "AUS", flight: "DL1060", aircraft: "Airbus A321" },
+              {
+                from: "MAD", fromCity: "Madrid, Spain",
+                to: "ATL", toCity: "Atlanta, GA",
+                flight: "DL0109", aircraft: "Airbus A330-300",
+                departs: "12:45 PM", arrives: "4:27 PM",
+                departDate: "Wed, May 6", arriveDate: "Wed, May 6",
+                duration: "9h 42m",
+                departTerminal: "Terminal 1",
+                arriveTerminal: "International Term",
+              },
+              {
+                from: "ATL", fromCity: "Atlanta, GA",
+                to: "AUS", toCity: "Austin, TX",
+                flight: "DL1060", aircraft: "Airbus A321",
+                departs: "6:12 PM", arrives: "7:46 PM",
+                departDate: "Wed, May 6", arriveDate: "Wed, May 6",
+                duration: "2h 34m",
+                departTerminal: "Domestic Term-South",
+                arriveTerminal: "Terminal TBD",
+              },
             ]}
           />
         </div>
 
-        <div className="mt-5 bg-card border border-border rounded-xl px-5 py-3 flex items-center gap-3">
-          <span className="text-xl">💡</span>
-          <p className="text-sm text-muted-foreground">Check in online 24h before departure. Layover in Atlanta (ATL) — allow time for customs on the return.</p>
+        <div className="mt-5 bg-card border border-border rounded-xl px-5 py-3 flex items-start gap-3">
+          <span className="text-xl mt-0.5">💡</span>
+          <div className="text-sm text-muted-foreground space-y-1">
+            <p>Check in online 24h before departure. On the return, allow extra time for customs at ATL — international arrivals can be slow.</p>
+            <p>Delta Main Basic (E) does not include Sky Club access. Centurion Lounge requires Amex Platinum or Centurion card.</p>
+          </div>
         </div>
       </div>
     </section>

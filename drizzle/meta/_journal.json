@@ -22,6 +22,20 @@
       "when": 1776192500981,
       "tag": "0002_silent_siren",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1776193230568,
+      "tag": "0003_closed_ultimo",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1776195085334,
+      "tag": "0004_quick_zarda",
+      "breakpoints": true
     }
   ]
 }

@@ -16,7 +16,7 @@ function toBase64(file: File): Promise<string> {
 
 function formatDate(date: Date | string) {
   return new Date(date).toLocaleString("en-US", {
-    month: "short", day: "numeric", hour: "numeric", minute: "2-digit",
+    month: "short", day: "numeric", hour: "2-digit", minute: "2-digit",
   });
 }
 
@@ -40,13 +40,13 @@ export default function JournalSection({ pin }: Props) {
       setFile(null);
       setPreview(null);
       setCaption("");
-      toast.success("Posted to the journal! 📸");
+      toast.success("Memory posted! 📸");
     },
     onError: (e) => toast.error(e.message),
   });
 
   const deletePost = trpc.journal.delete.useMutation({
-    onSuccess: () => { utils.journal.list.invalidate(); toast.success("Post removed."); },
+    onSuccess: () => { utils.journal.list.invalidate(); toast.success("Post deleted."); },
     onError: (e) => toast.error(e.message),
   });
 
@@ -60,7 +60,7 @@ export default function JournalSection({ pin }: Props) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file) { toast.error("Please select a photo first"); return; }
+    if (!file) { toast.error("Please select a photo first."); return; }
     setUploading(true);
     try {
       const base64 = await toBase64(file);
@@ -69,7 +69,7 @@ export default function JournalSection({ pin }: Props) {
       });
       await createPost.mutateAsync({ pin, posterName, photoUrl: url, photoKey: key, caption: caption.trim() || undefined });
     } catch (err: any) {
-      toast.error(err.message ?? "Upload failed");
+      toast.error(err.message ?? "Failed to upload photo.");
     } finally {
       setUploading(false);
     }
@@ -79,16 +79,15 @@ export default function JournalSection({ pin }: Props) {
     <section className="py-16 px-4">
       <div className="max-w-3xl mx-auto">
         <h2 className="font-display text-3xl md:text-4xl font-bold text-gold-gradient mb-2">Trip Journal</h2>
-        <p className="text-muted-foreground text-sm mb-8">Share your Madrid memories with the crew 📸</p>
+        <p className="text-muted-foreground text-sm mb-8">Share the best moments from Madrid 📸</p>
 
         {/* Upload Form */}
         <div className="bg-card border border-border rounded-2xl p-5 mb-10">
-          <p className="font-semibold text-foreground mb-4">Add a Memory</p>
+          <p className="font-semibold text-foreground mb-4">Add a memory</p>
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name selector */}
             <div>
-              <label className="text-xs text-muted-foreground uppercase tracking-wider block mb-2">Who are you?</label>
-              <div className="flex gap-2 flex-wrap">
+              <label className="text-xs text-muted-foreground uppercase tracking-wider block mb-2">Who are you?</label>              <div className="flex gap-2 flex-wrap">
                 {CREW_NAMES.map((name) => (
                   <button
                     key={name}
@@ -158,7 +157,7 @@ export default function JournalSection({ pin }: Props) {
         {/* Feed */}
         <div>
           <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-            {posts.length > 0 ? `${posts.length} Memories` : "No posts yet — be the first!"}
+            {posts.length > 0 ? `${posts.length} memor${posts.length !== 1 ? 'ies' : 'y'}` : "No memories yet — be the first to post!"}
           </p>
 
           {isLoading && (
@@ -184,10 +183,10 @@ export default function JournalSection({ pin }: Props) {
                       <span className="text-muted-foreground text-xs">{formatDate(post.createdAt)}</span>
                     </div>
                     <button
-                      onClick={() => { if (confirm("Remove this post?")) deletePost.mutate({ pin, id: post.id }); }}
+                      onClick={() => { if (confirm("Delete this post?")) deletePost.mutate({ pin, id: post.id }); }}
                       className="text-muted-foreground hover:text-red-400 transition text-xs px-2 py-1 rounded border border-border hover:border-red-400"
                     >
-                      Remove
+                      Delete
                     </button>
                   </div>
                   {post.caption && (

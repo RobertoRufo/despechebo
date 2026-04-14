@@ -5,7 +5,8 @@ const NAV_ITEMS = [
   { id: "itinerary", label: "Itinerary" },
   { id: "flights", label: "Flights" },
   { id: "airbnb", label: "Airbnb" },
-  { id: "crew", label: "Crew" },
+  { id: "crew", label: "The Crew" },
+  { id: "packing", label: "Packing" },
   { id: "journal", label: "Journal" },
 ];
 

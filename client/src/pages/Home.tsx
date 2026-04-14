@@ -1,6 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { trpc } from "@/lib/trpc";
-import { toast } from "sonner";
 import PasswordGate from "@/components/PasswordGate";
 import StickyNav from "@/components/StickyNav";
 import HeroSection from "@/components/HeroSection";
@@ -9,8 +7,11 @@ import FlightsSection from "@/components/FlightsSection";
 import AirbnbSection from "@/components/AirbnbSection";
 import CrewSection from "@/components/CrewSection";
 import JournalSection from "@/components/JournalSection";
+import PackingSection from "@/components/PackingSection";
 
 const PIN_KEY = "despedida_pin";
+
+const SECTION_IDS = ["hero", "itinerary", "flights", "airbnb", "crew", "packing", "journal"] as const;
 
 export default function Home() {
   const [pin, setPin] = useState<string | null>(() => {
@@ -27,10 +28,12 @@ export default function Home() {
     flights: useRef<HTMLDivElement>(null),
     airbnb: useRef<HTMLDivElement>(null),
     crew: useRef<HTMLDivElement>(null),
+    packing: useRef<HTMLDivElement>(null),
     journal: useRef<HTMLDivElement>(null),
   };
 
   useEffect(() => {
+    if (!pin) return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -41,7 +44,7 @@ export default function Home() {
       },
       { rootMargin: "-40% 0px -55% 0px" }
     );
-    Object.entries(sectionRefs).forEach(([id, ref]) => {
+    Object.entries(sectionRefs).forEach(([, ref]) => {
       if (ref.current) observer.observe(ref.current);
     });
     return () => observer.disconnect();
@@ -85,13 +88,17 @@ export default function Home() {
         <CrewSection />
       </div>
 
+      <div id="packing" ref={sectionRefs.packing}>
+        <PackingSection pin={pin} />
+      </div>
+
       <div id="journal" ref={sectionRefs.journal}>
         <JournalSection pin={pin} />
       </div>
 
       <footer className="py-8 text-center border-t border-border">
         <p className="font-display text-xl text-gold-gradient mb-1">¡Viva Sebastian! 🥂</p>
-        <p className="text-muted-foreground text-sm">Madrid · April 29 – May 6, 2026</p>
+        <p className="text-muted-foreground text-sm">Madrid · 29 de abril – 6 de mayo, 2026</p>
       </footer>
     </div>
   );

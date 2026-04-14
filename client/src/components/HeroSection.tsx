@@ -76,7 +76,7 @@ export default function HeroSection() {
           de Soltero
         </h2>
         <p className="text-muted-foreground text-lg mb-1 tracking-wide">
-          Sebastian's Bachelor Party
+          La Despedida de Sebastián
         </p>
         <div className="spanish-flag-bar w-32 mx-auto my-5 rounded-full" />
         <p className="text-foreground/80 text-base mb-10 font-medium">
@@ -86,12 +86,12 @@ export default function HeroSection() {
         {/* Countdown */}
         {arrived ? (
           <div className="text-3xl font-display font-bold text-primary animate-pulse">
-            ¡Estamos en Madrid! 🎉
+            We're in Madrid! 🎉
           </div>
         ) : (
           <>
             <p className="text-muted-foreground text-sm uppercase tracking-widest mb-4">
-              Countdown to Takeoff
+              Countdown to takeoff
             </p>
             <div className="flex items-start justify-center gap-3 md:gap-4">
               <CountdownUnit value={days} label="Days" />

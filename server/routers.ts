@@ -12,6 +12,12 @@ import {
   createItineraryItem,
   updateItineraryItem,
   deleteItineraryItem,
+  getPackingItems,
+  createPackingItem,
+  togglePackingItem,
+  deletePackingItem,
+  getLikesForItem,
+  toggleItineraryLike,
 } from "./db";
 import { storagePut } from "./storage";
 import { nanoid } from "nanoid";
@@ -114,7 +120,7 @@ export const appRouter = router({
         venue: z.string().max(256).optional(),
         address: z.string().optional(),
         mapsUrl: z.string().optional(),
-        badge: z.enum(["confirmed", "tbd", "hot"]).default("tbd"),
+        badge: z.enum(["reservation_confirmed", "tbd", "hot"]).default("tbd"),
       }))
       .mutation(async ({ input }) => {
         checkPin(input.pin);
@@ -139,7 +145,7 @@ export const appRouter = router({
         venue: z.string().max(256).optional(),
         address: z.string().optional(),
         mapsUrl: z.string().optional(),
-        badge: z.enum(["confirmed", "tbd", "hot"]).optional(),
+        badge: z.enum(["reservation_confirmed", "tbd", "hot"]).optional(),
         sortOrder: z.number().optional(),
       }))
       .mutation(async ({ input }) => {
@@ -153,6 +159,61 @@ export const appRouter = router({
       .mutation(async ({ input }) => {
         checkPin(input.pin);
         await deleteItineraryItem(input.id);
+        return { success: true };
+      }),
+
+    getLikes: publicProcedure
+      .input(z.object({ itemId: z.number() }))
+      .query(async ({ input }) => {
+        return getLikesForItem(input.itemId);
+      }),
+
+    toggleLike: publicProcedure
+      .input(z.object({ pin: z.string(), itemId: z.number(), memberName: z.string() }))
+      .mutation(async ({ input }) => {
+        checkPin(input.pin);
+        return toggleItineraryLike(input.itemId, input.memberName);
+      }),
+  }),
+
+  // ─── Packing Checklist ─────────────────────────────────────────────────────────────
+  packing: router({
+    list: publicProcedure.query(async () => {
+      return getPackingItems();
+    }),
+
+    create: publicProcedure
+      .input(z.object({
+        pin: z.string(),
+        text: z.string().min(1).max(256),
+        category: z.string().max(64).default("General"),
+        sortOrder: z.number().default(999),
+      }))
+      .mutation(async ({ input }) => {
+        checkPin(input.pin);
+        return createPackingItem({
+          text: input.text,
+          category: input.category,
+          sortOrder: input.sortOrder,
+        });
+      }),
+
+    toggle: publicProcedure
+      .input(z.object({
+        pin: z.string(),
+        id: z.number(),
+        checkedBy: z.enum(CREW_NAMES).nullable(),
+      }))
+      .mutation(async ({ input }) => {
+        checkPin(input.pin);
+        return togglePackingItem(input.id, input.checkedBy);
+      }),
+
+    delete: publicProcedure
+      .input(z.object({ pin: z.string(), id: z.number() }))
+      .mutation(async ({ input }) => {
+        checkPin(input.pin);
+        await deletePackingItem(input.id);
         return { success: true };
       }),
   }),

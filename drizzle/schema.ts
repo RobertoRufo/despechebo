@@ -36,10 +36,33 @@ export const itineraryItems = mysqlTable("itinerary_items", {
   venue: varchar("venue", { length: 256 }),
   address: text("address"),
   mapsUrl: text("mapsUrl"),
-  badge: mysqlEnum("badge", ["confirmed", "tbd", "hot"]).default("tbd").notNull(),
+  badge: mysqlEnum("badge", ["reservation_confirmed", "tbd", "hot"]).default("tbd").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
 export type ItineraryItem = typeof itineraryItems.$inferSelect;
 export type InsertItineraryItem = typeof itineraryItems.$inferInsert;
+
+export const itineraryLikes = mysqlTable("itinerary_likes", {
+  id: int("id").autoincrement().primaryKey(),
+  itemId: int("itemId").notNull(),
+  memberName: varchar("memberName", { length: 64 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ItineraryLike = typeof itineraryLikes.$inferSelect;
+export type InsertItineraryLike = typeof itineraryLikes.$inferInsert;
+
+export const packingItems = mysqlTable("packing_items", {
+  id: int("id").autoincrement().primaryKey(),
+  text: varchar("text", { length: 256 }).notNull(),
+  category: varchar("category", { length: 64 }).default("General").notNull(),
+  checkedBy: varchar("checkedBy", { length: 64 }),
+  sortOrder: int("sortOrder").notNull().default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PackingItem = typeof packingItems.$inferSelect;
+export type InsertPackingItem = typeof packingItems.$inferInsert;

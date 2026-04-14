@@ -18,7 +18,7 @@ function InfoRow({ label, value, copyable }: { label: string; value: string; cop
       </div>
       {copyable && (
         <button onClick={copy} className="flex-shrink-0 text-xs px-3 py-1.5 rounded-lg border border-border text-muted-foreground hover:text-primary hover:border-primary transition mt-1">
-          {copied ? "✓" : "Copy"}
+          {copied ? "✓ Copied" : "Copy"}
         </button>
       )}
     </div>
@@ -48,7 +48,7 @@ export default function AirbnbSection() {
           <div className="px-5">
             <InfoRow label="Full Address" value="Calle del Espíritu Santo, 2 1º-1, Madrid 28004, Spain" copyable />
             <InfoRow label="Check-in" value="Wednesday, April 29 · From 3:00 PM" />
-            <InfoRow label="Check-out" value="Wednesday, May 6 · By 11:00 AM" />
+            <InfoRow label="Check-out" value="Wednesday, May 6 · Before 11:00 AM" />
             <InfoRow label="Host" value="Mar" />
             <InfoRow label="Host Phone" value="+34 645 90 97 26" copyable />
             <InfoRow label="Confirmation Code" value="HMESCMBRRJ" copyable />
@@ -69,8 +69,8 @@ export default function AirbnbSection() {
 
         {/* Tips */}
         <div className="mt-4 bg-card border border-border rounded-xl px-5 py-4 space-y-2">
-          <p className="text-sm font-semibold text-foreground">📋 Check-in Tips</p>
-          <p className="text-sm text-muted-foreground">Contact host Mar on arrival for key/access instructions. The apartment is in the heart of Malasaña — great walkability to bars and restaurants.</p>
+          <p className="text-sm font-semibold text-foreground">📋 Arrival Tips</p>
+          <p className="text-sm text-muted-foreground">Contact host Mar on arrival for access instructions. The apartment is in the heart of Malasaña — perfect for walking to bars and restaurants.</p>
         </div>
       </div>
     </section>

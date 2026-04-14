@@ -82,7 +82,7 @@ export default function PasswordGate({ onUnlock }: Props) {
             disabled={verify.isPending || !input.trim()}
             className="w-full bg-primary text-primary-foreground font-bold py-4 rounded-xl text-lg hover:opacity-90 active:scale-95 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {verify.isPending ? "Checking..." : "Enter 🎉"}
+            {verify.isPending ? "Verifying..." : "Enter 🎉"}
           </button>
         </form>
 
