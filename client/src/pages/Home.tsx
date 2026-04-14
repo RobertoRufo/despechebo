@@ -65,7 +65,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-white text-stone-900">
       <StickyNav activeSection={activeSection} onNavigate={scrollTo} />
 
       <div id="hero" ref={sectionRefs.hero}>
@@ -96,9 +96,9 @@ export default function Home() {
         <JournalSection pin={pin} />
       </div>
 
-      <footer className="py-8 text-center border-t border-border">
-        <p className="font-display text-xl text-gold-gradient mb-1">¡Viva Sebastian! 🥂</p>
-        <p className="text-muted-foreground text-sm">Madrid · 29 de abril – 6 de mayo, 2026</p>
+      <footer className="py-10 text-center border-t border-stone-200 bg-red-700">
+        <p className="font-display text-2xl font-black text-amber-300 mb-1">¡Viva Sebastian! 🥂🇪🇸💃</p>
+        <p className="text-red-200 text-sm">Madrid · April 29 – May 6, 2026</p>
       </footer>
     </div>
   );

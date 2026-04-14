@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -43,46 +43,70 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-:root {
-  --primary: oklch(0.78 0.14 75);
-  --primary-foreground: oklch(0.13 0.03 250);
-  --background: oklch(0.13 0.03 250);
-  --foreground: oklch(0.95 0.01 90);
-  --card: oklch(0.17 0.04 250);
-  --card-foreground: oklch(0.95 0.01 90);
-  --popover: oklch(0.17 0.04 250);
-  --popover-foreground: oklch(0.95 0.01 90);
-  --secondary: oklch(0.22 0.05 250);
-  --secondary-foreground: oklch(0.95 0.01 90);
-  --muted: oklch(0.22 0.04 250);
-  --muted-foreground: oklch(0.65 0.03 250);
-  --accent: oklch(0.55 0.22 25);
-  --accent-foreground: oklch(0.98 0.01 90);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0.01 90);
-  --border: oklch(0.28 0.05 250);
-  --input: oklch(0.22 0.05 250);
-  --ring: oklch(0.78 0.14 75);
-  --sidebar: oklch(0.17 0.04 250);
-  --sidebar-foreground: oklch(0.95 0.01 90);
-  --sidebar-accent: oklch(0.22 0.05 250);
-  --sidebar-accent-foreground: oklch(0.95 0.01 90);
-  --sidebar-border: oklch(0.28 0.05 250);
-  --sidebar-ring: oklch(0.78 0.14 75);
-  --sidebar-primary: oklch(0.78 0.14 75);
-  --sidebar-primary-foreground: oklch(0.13 0.03 250);
-  --chart-1: oklch(0.78 0.14 75);
-  --chart-2: oklch(0.55 0.22 25);
-  --chart-3: oklch(0.65 0.10 250);
-  --chart-4: oklch(0.45 0.14 145);
-  --chart-5: oklch(0.60 0.18 300);
-  --radius: 0.65rem;
-}
+/* ─── Spanish Fiesta Theme ─────────────────────────────────────────────────────
+   Palette:
+   - Background: warm cream/ivory  #FDF6EC → oklch(0.97 0.02 80)
+   - Card:        soft warm white   #FFFAF3 → oklch(0.99 0.01 80)
+   - Primary:     Spanish red       #C60B1E → oklch(0.45 0.22 25)
+   - Gold:        Spanish gold      #F1BF00 → oklch(0.82 0.17 90)
+   - Foreground:  rich dark brown   #2C1A0E → oklch(0.18 0.04 55)
+   - Muted:       warm taupe        #8B7355 → oklch(0.52 0.05 65)
+   - Border:      warm sand         #E8D5B0 → oklch(0.87 0.04 80)
+   - Secondary:   light warm sand   #F5EDD8 → oklch(0.94 0.03 80)
+──────────────────────────────────────────────────────────────────────────────── */
 
-.dark {
-  --primary: oklch(0.78 0.14 75);
-  --primary-foreground: oklch(0.13 0.03 250);
-  --sidebar-primary-foreground: oklch(0.13 0.03 250);
+:root {
+  /* Spanish Red as primary */
+  --primary: oklch(0.45 0.22 25);
+  --primary-foreground: oklch(0.99 0.01 80);
+
+  /* Warm cream background */
+  --background: oklch(0.97 0.02 80);
+  --foreground: oklch(0.18 0.04 55);
+
+  /* Soft white cards */
+  --card: oklch(0.99 0.01 80);
+  --card-foreground: oklch(0.18 0.04 55);
+
+  --popover: oklch(0.99 0.01 80);
+  --popover-foreground: oklch(0.18 0.04 55);
+
+  /* Warm sand secondary */
+  --secondary: oklch(0.94 0.03 80);
+  --secondary-foreground: oklch(0.30 0.05 55);
+
+  /* Muted taupe */
+  --muted: oklch(0.93 0.02 80);
+  --muted-foreground: oklch(0.52 0.05 65);
+
+  /* Gold accent */
+  --accent: oklch(0.82 0.17 90);
+  --accent-foreground: oklch(0.18 0.04 55);
+
+  --destructive: oklch(0.45 0.22 25);
+  --destructive-foreground: oklch(0.99 0.01 80);
+
+  /* Warm sand border */
+  --border: oklch(0.87 0.04 80);
+  --input: oklch(0.93 0.02 80);
+  --ring: oklch(0.45 0.22 25);
+
+  --sidebar: oklch(0.99 0.01 80);
+  --sidebar-foreground: oklch(0.18 0.04 55);
+  --sidebar-accent: oklch(0.94 0.03 80);
+  --sidebar-accent-foreground: oklch(0.18 0.04 55);
+  --sidebar-border: oklch(0.87 0.04 80);
+  --sidebar-ring: oklch(0.45 0.22 25);
+  --sidebar-primary: oklch(0.45 0.22 25);
+  --sidebar-primary-foreground: oklch(0.99 0.01 80);
+
+  --chart-1: oklch(0.45 0.22 25);
+  --chart-2: oklch(0.82 0.17 90);
+  --chart-3: oklch(0.52 0.05 65);
+  --chart-4: oklch(0.60 0.14 145);
+  --chart-5: oklch(0.55 0.18 300);
+
+  --radius: 0.75rem;
 }
 
 @layer base {
@@ -95,12 +119,15 @@
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse at 10% 20%, oklch(0.45 0.22 25 / 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, oklch(0.82 0.17 90 / 0.06) 0%, transparent 50%);
   }
   h1, h2, h3 { font-family: 'Playfair Display', serif; }
   ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: oklch(0.13 0.03 250); }
-  ::-webkit-scrollbar-thumb { background: oklch(0.28 0.05 250); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: oklch(0.78 0.14 75); }
+  ::-webkit-scrollbar-track { background: oklch(0.93 0.02 80); }
+  ::-webkit-scrollbar-thumb { background: oklch(0.87 0.04 80); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: oklch(0.45 0.22 25); }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -115,32 +142,78 @@
 }
 
 @layer utilities {
+  /* Gold gradient text — now rich amber-to-gold on light bg */
   .text-gold-gradient {
-    background: linear-gradient(135deg, oklch(0.88 0.16 82), oklch(0.78 0.14 75), oklch(0.68 0.12 68));
+    background: linear-gradient(135deg, oklch(0.55 0.20 45), oklch(0.45 0.22 25), oklch(0.55 0.20 45));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .spanish-flag-bar {
-    height: 4px;
-    background: linear-gradient(to right, oklch(0.55 0.22 25) 33%, oklch(0.78 0.14 75) 33%, oklch(0.78 0.14 75) 67%, oklch(0.55 0.22 25) 67%);
+
+  /* Spanish red gradient text */
+  .text-red-gradient {
+    background: linear-gradient(135deg, oklch(0.50 0.24 25), oklch(0.38 0.20 20), oklch(0.50 0.24 25));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
+
+  /* Spanish flag bar — red / gold / red */
+  .spanish-flag-bar {
+    height: 5px;
+    background: linear-gradient(to right,
+      oklch(0.45 0.22 25) 33%,
+      oklch(0.82 0.17 90) 33%,
+      oklch(0.82 0.17 90) 67%,
+      oklch(0.45 0.22 25) 67%
+    );
+    border-radius: 3px;
+  }
+
+  /* Badge styles for light theme */
   .badge-confirmed {
-    background: oklch(0.25 0.10 145);
-    color: oklch(0.75 0.14 145);
-    border: 1px solid oklch(0.40 0.14 145);
+    background: oklch(0.92 0.06 145);
+    color: oklch(0.35 0.14 145);
+    border: 1px solid oklch(0.75 0.12 145);
   }
   .badge-tbd {
-    background: oklch(0.22 0.05 250);
-    color: oklch(0.60 0.06 250);
-    border: 1px solid oklch(0.32 0.06 250);
+    background: oklch(0.93 0.02 80);
+    color: oklch(0.45 0.05 65);
+    border: 1px solid oklch(0.82 0.04 80);
   }
   .badge-hot {
-    background: oklch(0.28 0.16 25);
-    color: oklch(0.82 0.18 35);
-    border: 1px solid oklch(0.48 0.20 25);
+    background: oklch(0.95 0.10 60);
+    color: oklch(0.45 0.22 25);
+    border: 1px solid oklch(0.82 0.17 90);
   }
+
   .font-display { font-family: 'Playfair Display', serif; }
+
+  /* Festive card with subtle red border glow */
+  .fiesta-card {
+    background: oklch(0.99 0.01 80);
+    border: 1px solid oklch(0.87 0.04 80);
+    box-shadow: 0 2px 12px oklch(0.45 0.22 25 / 0.06), 0 1px 3px oklch(0.18 0.04 55 / 0.08);
+    border-radius: var(--radius-xl);
+  }
+
+  /* Hero gradient background */
+  .hero-bg {
+    background:
+      linear-gradient(160deg,
+        oklch(0.45 0.22 25) 0%,
+        oklch(0.38 0.20 20) 40%,
+        oklch(0.28 0.12 30) 100%
+      );
+  }
+
+  /* Section alternating backgrounds */
+  .section-warm {
+    background: oklch(0.97 0.02 80);
+  }
+  .section-cream {
+    background: oklch(0.99 0.01 80);
+  }
 }
 
 @keyframes fadeInUp {
@@ -149,51 +222,36 @@
 }
 .animate-fade-in-up { animation: fadeInUp 0.5s ease forwards; }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 0.9; }
+/* Confetti-like sparkle for hero */
+@keyframes sparkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
-.star { animation: twinkle var(--duration, 3s) ease-in-out infinite; animation-delay: var(--delay, 0s); }
+.star { animation: sparkle var(--duration, 3s) ease-in-out infinite; animation-delay: var(--delay, 0s); }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
-
   .flex {
     min-height: 0;
     min-width: 0;
   }
-
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
   }
-
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem; /* 32px - desktop padding */
+      padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
+      max-width: 1280px;
     }
   }
 }

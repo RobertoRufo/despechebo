@@ -11,13 +11,16 @@ function InfoRow({ label, value, copyable }: { label: string; value: string; cop
     });
   };
   return (
-    <div className="flex items-start justify-between gap-3 py-3 border-b border-border last:border-0">
+    <div className="flex items-start justify-between gap-3 py-3 border-b border-stone-100 last:border-0">
       <div>
-        <p className="text-xs text-muted-foreground uppercase tracking-wider mb-0.5">{label}</p>
-        <p className="text-foreground font-medium text-sm">{value}</p>
+        <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">{label}</p>
+        <p className="text-stone-800 font-semibold text-sm">{value}</p>
       </div>
       {copyable && (
-        <button onClick={copy} className="flex-shrink-0 text-xs px-3 py-1.5 rounded-lg border border-border text-muted-foreground hover:text-primary hover:border-primary transition mt-1">
+        <button
+          onClick={copy}
+          className="flex-shrink-0 text-xs px-3 py-1.5 rounded-lg border border-stone-200 text-stone-500 hover:text-red-700 hover:border-red-300 hover:bg-red-50 transition mt-1"
+        >
           {copied ? "✓ Copied" : "Copy"}
         </button>
       )}
@@ -27,19 +30,19 @@ function InfoRow({ label, value, copyable }: { label: string; value: string; cop
 
 export default function AirbnbSection() {
   return (
-    <section className="py-16 px-4">
+    <section className="py-16 px-4 bg-white">
       <div className="max-w-3xl mx-auto">
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-gold-gradient mb-2">Accommodation</h2>
-        <p className="text-muted-foreground text-sm mb-8">Airbnb · Malasaña, Madrid</p>
+        <h2 className="font-display text-3xl md:text-4xl font-black text-red-700 mb-2">🏡 Accommodation</h2>
+        <p className="text-stone-500 text-sm mb-8">Airbnb · Malasaña, Madrid</p>
 
-        <div className="bg-card border border-border rounded-2xl overflow-hidden">
+        <div className="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm shadow-red-900/5">
           {/* Header */}
-          <div className="bg-gradient-to-r from-accent/20 to-card px-5 py-4 border-b border-border">
+          <div className="bg-gradient-to-r from-red-600 to-red-700 px-5 py-4 border-b border-red-700">
             <div className="flex items-center gap-3">
               <span className="text-3xl">🏠</span>
               <div>
-                <p className="font-display font-bold text-xl text-foreground">Calle del Espíritu Santo 2</p>
-                <p className="text-muted-foreground text-sm">Madrid 28004 · Malasaña</p>
+                <p className="font-display font-bold text-xl text-white">Calle del Espíritu Santo 2</p>
+                <p className="text-red-200 text-sm">Madrid 28004 · Malasaña</p>
               </div>
             </div>
           </div>
@@ -60,7 +63,7 @@ export default function AirbnbSection() {
               href="https://maps.google.com/?q=Calle+del+Espiritu+Santo+2+1-1+Madrid+28004+Spain"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-primary/40 text-primary text-sm font-semibold hover:bg-primary/10 transition"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-red-200 text-red-700 text-sm font-semibold hover:bg-red-50 transition"
             >
               📍 Open in Google Maps
             </a>
@@ -68,9 +71,9 @@ export default function AirbnbSection() {
         </div>
 
         {/* Tips */}
-        <div className="mt-4 bg-card border border-border rounded-xl px-5 py-4 space-y-2">
-          <p className="text-sm font-semibold text-foreground">📋 Arrival Tips</p>
-          <p className="text-sm text-muted-foreground">Contact host Mar on arrival for access instructions. The apartment is in the heart of Malasaña — perfect for walking to bars and restaurants.</p>
+        <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 space-y-2">
+          <p className="text-sm font-semibold text-stone-700">📋 Arrival Tips</p>
+          <p className="text-sm text-stone-500">Contact host Mar on arrival for access instructions. The apartment is in the heart of Malasaña — perfect for walking to bars and restaurants.</p>
         </div>
       </div>
     </section>

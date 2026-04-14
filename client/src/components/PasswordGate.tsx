@@ -29,36 +29,44 @@ export default function PasswordGate({ onUnlock }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4">
-      {/* Stars */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 40 }).map((_, i) => (
+    <div className="min-h-screen hero-bg flex flex-col items-center justify-center px-4 relative overflow-hidden">
+      {/* Floating festive emojis */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none select-none">
+        {["💃","🕺","🇪🇸","🌹","🥂","🎉","🏟️","🎸","🌞","🍷","💃","🕺","🇪🇸","🌹","🥂","🎉","🌞","🍷","🎸","🏟️"].map((emoji, i) => (
           <div
             key={i}
-            className="star absolute rounded-full bg-amber-300"
+            className="star absolute text-lg opacity-20"
             style={{
-              width: Math.random() * 3 + 1 + "px",
-              height: Math.random() * 3 + 1 + "px",
-              left: Math.random() * 100 + "%",
-              top: Math.random() * 100 + "%",
-              "--duration": Math.random() * 3 + 2 + "s",
-              "--delay": Math.random() * 3 + "s",
+              left: (i * 5.3 + Math.sin(i) * 8) % 100 + "%",
+              top: (i * 4.7 + Math.cos(i) * 10) % 100 + "%",
+              "--duration": (2 + (i % 4)) + "s",
+              "--delay": (i * 0.3) % 3 + "s",
+              fontSize: (14 + (i % 3) * 6) + "px",
             } as React.CSSProperties}
-          />
+          >
+            {emoji}
+          </div>
         ))}
       </div>
 
       <div className="relative z-10 w-full max-w-sm">
-        {/* Logo / Title */}
-        <div className="text-center mb-8">
-          <div className="spanish-flag-bar w-24 mx-auto mb-6 rounded-full" />
-          <h1 className="font-display text-4xl font-bold text-gold-gradient mb-2">
-            Despedida de Soltero
+        {/* Title */}
+        <div className="text-center mb-10">
+          <div className="text-5xl mb-4">🇪🇸</div>
+          <h1 className="font-display text-5xl font-black text-white mb-1 drop-shadow-lg">
+            Despedida
           </h1>
-          <p className="text-muted-foreground text-sm tracking-widest uppercase">
-            Madrid · 2026
-          </p>
-          <div className="text-3xl mt-4">🇪🇸</div>
+          <h2 className="font-display text-3xl font-bold text-yellow-300 mb-3 drop-shadow">
+            de Soltero
+          </h2>
+          <div className="flex items-center justify-center gap-3 mb-1">
+            <div className="h-px w-12 bg-yellow-300/50" />
+            <p className="text-yellow-200/80 text-sm tracking-[0.25em] uppercase font-medium">
+              Madrid · 2026
+            </p>
+            <div className="h-px w-12 bg-yellow-300/50" />
+          </div>
+          <p className="text-white/60 text-xs mt-2">💃 Sebastian's Bachelor Party 🕺</p>
         </div>
 
         {/* PIN Form */}
@@ -74,19 +82,19 @@ export default function PasswordGate({ onUnlock }: Props) {
               placeholder="Enter PIN"
               maxLength={20}
               autoFocus
-              className="w-full bg-card border border-border rounded-xl px-5 py-4 text-center text-xl font-bold tracking-[0.3em] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+              className="w-full bg-white/10 backdrop-blur border-2 border-yellow-300/40 rounded-2xl px-5 py-4 text-center text-xl font-bold tracking-[0.3em] text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300 transition"
             />
           </div>
           <button
             type="submit"
             disabled={verify.isPending || !input.trim()}
-            className="w-full bg-primary text-primary-foreground font-bold py-4 rounded-xl text-lg hover:opacity-90 active:scale-95 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-yellow-400 text-red-900 font-black py-4 rounded-2xl text-lg hover:bg-yellow-300 active:scale-95 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-yellow-400/30"
           >
-            {verify.isPending ? "Verifying..." : "Enter 🎉"}
+            {verify.isPending ? "Verifying..." : "¡Vamos! 🎉"}
           </button>
         </form>
 
-        <p className="text-center text-muted-foreground text-xs mt-6">
+        <p className="text-center text-white/40 text-xs mt-6">
           This site is private. Ask Roberto for the PIN.
         </p>
       </div>

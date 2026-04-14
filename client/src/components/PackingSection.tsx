@@ -60,23 +60,23 @@ export default function PackingSection({ pin }: Props) {
   }, {});
 
   return (
-    <section className="py-16 px-4 bg-secondary/20">
+    <section className="py-16 px-4 bg-amber-50">
       <div className="max-w-3xl mx-auto">
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-gold-gradient mb-2">Packing List</h2>
-        <p className="text-muted-foreground text-sm mb-6">Shared list — everyone can check off what they've packed 🦳</p>
+        <h2 className="font-display text-3xl md:text-4xl font-black text-red-700 mb-2">🧳 Packing List</h2>
+        <p className="text-stone-500 text-sm mb-6">Shared list — everyone can check off what they've packed</p>
 
         {/* Who am I selector */}
-        <div className="bg-card border border-border rounded-2xl p-4 mb-5">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Who are you?</p>
+        <div className="bg-white border border-stone-200 rounded-2xl p-4 mb-5 shadow-sm">
+          <p className="text-xs text-stone-400 uppercase tracking-wider mb-2 font-semibold">Who are you?</p>
           <div className="flex gap-2 flex-wrap">
             {CREW_NAMES.map(name => (
               <button
                 key={name}
                 onClick={() => setMyName(name)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium border transition ${
+                className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition ${
                   myName === name
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "border-border text-muted-foreground hover:border-primary hover:text-primary"
+                    ? "bg-red-600 text-white border-red-600"
+                    : "border-stone-200 text-stone-500 hover:border-red-300 hover:text-red-700"
                 }`}
               >
                 {name}
@@ -88,13 +88,13 @@ export default function PackingSection({ pin }: Props) {
         {/* Progress bar */}
         {total > 0 && (
           <div className="mb-5">
-            <div className="flex justify-between text-xs text-muted-foreground mb-1">
+            <div className="flex justify-between text-xs text-stone-500 mb-1">
               <span>{packed} of {total} packed</span>
-              <span className="font-semibold text-primary">{pct}%</span>
+              <span className="font-bold text-red-600">{pct}%</span>
             </div>
-            <div className="h-2 bg-secondary rounded-full overflow-hidden">
+            <div className="h-2.5 bg-stone-200 rounded-full overflow-hidden">
               <div
-                className="h-full bg-primary rounded-full transition-all duration-500"
+                className="h-full bg-red-500 rounded-full transition-all duration-500"
                 style={{ width: `${pct}%` }}
               />
             </div>
@@ -105,15 +105,15 @@ export default function PackingSection({ pin }: Props) {
         <div className="flex gap-2 overflow-x-auto pb-2 mb-5" style={{ scrollbarWidth: "none" }}>
           <button
             onClick={() => setFilterCat(null)}
-            className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition ${!filterCat ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary hover:text-primary"}`}
+            className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border transition ${!filterCat ? "bg-red-600 text-white border-red-600" : "border-stone-200 text-stone-500 hover:border-red-300 hover:text-red-700"}`}
           >
-            Todo
+            All
           </button>
           {CATEGORIES.map(cat => (
             <button
               key={cat}
               onClick={() => setFilterCat(filterCat === cat ? null : cat)}
-              className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition ${filterCat === cat ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary hover:text-primary"}`}
+              className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border transition ${filterCat === cat ? "bg-red-600 text-white border-red-600" : "border-stone-200 text-stone-500 hover:border-red-300 hover:text-red-700"}`}
             >
               {cat}
             </button>
@@ -121,8 +121,8 @@ export default function PackingSection({ pin }: Props) {
         </div>
 
         {/* Add item form */}
-        <div className="bg-card border border-border rounded-2xl p-4 mb-6">
-          <p className="text-sm font-semibold text-foreground mb-3">Add an item</p>
+        <div className="bg-white border border-stone-200 rounded-2xl p-4 mb-6 shadow-sm">
+          <p className="text-sm font-bold text-stone-700 mb-3">Add an item</p>
           <div className="flex gap-2 flex-col sm:flex-row">
             <input
               value={newItem}
@@ -133,12 +133,12 @@ export default function PackingSection({ pin }: Props) {
                 }
               }}
               placeholder="e.g. Passport, power adapter, sunscreen..."
-              className="flex-1 bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+              className="flex-1 bg-stone-50 border border-stone-200 rounded-xl px-4 py-2.5 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-red-400"
             />
             <select
               value={newCategory}
               onChange={e => setNewCategory(e.target.value)}
-              className="bg-background border border-border rounded-xl px-3 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+              className="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm text-stone-700 focus:outline-none focus:ring-2 focus:ring-red-400"
             >
               {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
@@ -147,7 +147,7 @@ export default function PackingSection({ pin }: Props) {
                 if (newItem.trim()) addItem.mutate({ pin, text: newItem.trim(), category: newCategory });
               }}
               disabled={!newItem.trim() || addItem.isPending}
-              className="bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 disabled:opacity-50 transition"
+              className="bg-red-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-red-700 disabled:opacity-50 transition"
             >
               + Add
             </button>
@@ -157,12 +157,12 @@ export default function PackingSection({ pin }: Props) {
         {/* Items grouped by category */}
         {isLoading && (
           <div className="space-y-3">
-            {[...Array(3)].map((_, i) => <div key={i} className="h-12 bg-card rounded-xl animate-pulse" />)}
+            {[...Array(3)].map((_, i) => <div key={i} className="h-12 bg-stone-100 rounded-xl animate-pulse" />)}
           </div>
         )}
 
         {!isLoading && total === 0 && (
-          <div className="text-center py-10 text-muted-foreground">
+          <div className="text-center py-10 text-stone-400">
             <div className="text-4xl mb-3">🧳</div>
             <p className="text-sm">The list is empty. Start adding items!</p>
           </div>
@@ -171,8 +171,8 @@ export default function PackingSection({ pin }: Props) {
         <div className="space-y-5">
           {Object.entries(grouped).map(([cat, catItems]) => (
             <div key={cat}>
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{cat}</p>
-              <div className="bg-card border border-border rounded-2xl divide-y divide-border overflow-hidden">
+              <p className="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">{cat}</p>
+              <div className="bg-white border border-stone-200 rounded-2xl divide-y divide-stone-100 overflow-hidden shadow-sm">
                 {catItems.map(item => {
                   const isPacked = item.checkedBy !== null;
                   return (
@@ -187,23 +187,23 @@ export default function PackingSection({ pin }: Props) {
                         }
                         className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition ${
                           isPacked
-                            ? "bg-primary border-primary text-primary-foreground"
-                            : "border-border hover:border-primary"
+                            ? "bg-red-500 border-red-500 text-white"
+                            : "border-stone-300 hover:border-red-400"
                         }`}
                       >
                         {isPacked && <span className="text-xs">✓</span>}
                       </button>
                       <div className="flex-1 min-w-0">
-                        <span className={`text-sm transition ${isPacked ? "line-through text-muted-foreground" : "text-foreground"}`}>
+                        <span className={`text-sm transition ${isPacked ? "line-through text-stone-400" : "text-stone-800"}`}>
                           {item.text}
                         </span>
                         {isPacked && item.checkedBy && (
-                          <span className="ml-2 text-xs text-primary/70">· {item.checkedBy}</span>
+                          <span className="ml-2 text-xs text-red-400 font-medium">· {item.checkedBy}</span>
                         )}
                       </div>
                       <button
                         onClick={() => deleteItem.mutate({ pin, id: item.id })}
-                        className="text-muted-foreground hover:text-red-400 transition text-xs px-1.5 py-1 rounded"
+                        className="text-stone-300 hover:text-red-400 transition text-xs px-1.5 py-1 rounded"
                       >
                         ✕
                       </button>

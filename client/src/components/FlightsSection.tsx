@@ -33,7 +33,7 @@ interface FlightCardProps {
 
 function LegCard({ leg, isFirst }: { leg: Leg; isFirst: boolean }) {
   return (
-    <div className="bg-background/50 rounded-xl p-4 border border-border/60">
+    <div className="bg-stone-50 rounded-xl p-4 border border-stone-200">
       <div className="flex items-center justify-between mb-3">
         <span className="text-xs font-bold text-primary uppercase tracking-wider">{leg.flight}</span>
         <span className="text-xs text-muted-foreground">{leg.aircraft}</span>
@@ -81,20 +81,20 @@ function LayoverBadge({ duration, airport, lounges }: { duration: string; airpor
   return (
     <div className="relative flex flex-col items-center my-1">
       <div className="w-px h-3 bg-border" />
-      <div className="bg-card border border-border rounded-xl px-4 py-2 w-full">
+      <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-2 w-full">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <span className="text-sm">🔄</span>
             <span className="text-xs font-semibold text-foreground">Layover at {airport}</span>
           </div>
-          <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">{duration}</span>
+              <span className="text-xs font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded-full border border-red-200">{duration}</span>
         </div>
         <div className="space-y-1.5">
           {lounges.map((lounge, i) => (
-            <div key={i} className={`flex items-start gap-2 text-xs rounded-lg px-2 py-1.5 ${lounge.accessible ? 'bg-green-500/10 border border-green-500/20' : 'bg-secondary/50 border border-border/40'}`}>
+            <div key={i} className={`flex items-start gap-2 text-xs rounded-lg px-2 py-1.5 ${lounge.accessible ? 'bg-green-50 border border-green-200' : 'bg-stone-100 border border-stone-200'}`}>
               <span className="mt-0.5 flex-shrink-0">{lounge.accessible ? '✅' : '⚠️'}</span>
               <div>
-                <span className={`font-semibold ${lounge.accessible ? 'text-green-400' : 'text-muted-foreground'}`}>{lounge.name}</span>
+                <span className={`font-semibold ${lounge.accessible ? 'text-green-700' : 'text-stone-500'}`}>{lounge.name}</span>
                 <span className="text-muted-foreground"> · {lounge.access}</span>
                 {lounge.note && <p className="text-muted-foreground/70 mt-0.5">{lounge.note}</p>}
               </div>
@@ -109,15 +109,15 @@ function LayoverBadge({ duration, airport, lounges }: { duration: string; airpor
 
 function FlightCard({ direction, route, totalDuration, legs, layoverDuration, layoverAirport, lounges }: FlightCardProps) {
   return (
-    <div className="bg-card border border-border rounded-2xl overflow-hidden">
-      <div className="bg-gradient-to-r from-primary/10 to-card px-5 py-3 border-b border-border flex items-center justify-between">
+    <div className="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm shadow-red-900/5">
+      <div className="bg-gradient-to-r from-red-600 to-red-700 px-5 py-3 border-b border-red-700 flex items-center justify-between">
         <div>
-          <span className="text-xs text-muted-foreground uppercase tracking-widest">{direction}</span>
-          <p className="font-display font-bold text-lg text-foreground">{route}</p>
+          <span className="text-xs text-red-200 uppercase tracking-widest">{direction}</span>
+          <p className="font-display font-bold text-lg text-white">{route}</p>
         </div>
         <div className="text-right">
-          <p className="text-xs text-muted-foreground">Total Duration</p>
-          <p className="font-semibold text-primary text-sm">{totalDuration}</p>
+          <p className="text-xs text-red-200">Total Duration</p>
+          <p className="font-semibold text-yellow-300 text-sm">{totalDuration}</p>
         </div>
       </div>
       <div className="px-4 py-4 space-y-1">
@@ -176,9 +176,9 @@ const ATL_LOUNGES_RETURN: Lounge[] = [
 
 export default function FlightsSection() {
   return (
-    <section className="py-16 px-4 bg-secondary/20">
+    <section className="py-16 px-4 bg-stone-50">
       <div className="max-w-3xl mx-auto">
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-gold-gradient mb-2">Flights</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black text-red-700 mb-2">✈️ Flights</h2>
         <p className="text-muted-foreground text-sm mb-8">Delta Air Lines · Austin ↔ Madrid · All times local</p>
 
         <div className="space-y-6">
@@ -245,7 +245,7 @@ export default function FlightsSection() {
           />
         </div>
 
-        <div className="mt-5 bg-card border border-border rounded-xl px-5 py-3 flex items-start gap-3">
+        <div className="mt-5 bg-amber-50 border border-amber-200 rounded-xl px-5 py-3 flex items-start gap-3">
           <span className="text-xl mt-0.5">💡</span>
           <div className="text-sm text-muted-foreground space-y-1">
             <p>Check in online 24h before departure. On the return, allow extra time for customs at ATL — international arrivals can be slow.</p>

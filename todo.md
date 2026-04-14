@@ -86,3 +86,12 @@
 - [x] MAD layover lounge info (Sala VIP Iberia / Melia)
 - [x] Reverted all Spanish strings in PackingSection and JournalSection to English
 - [x] Updated Berria Wine Bar to Confirmed Reservation, 7:00 PM Apr 30, party of 4, under Roberto Rufo
+
+## Theme Redesign (Spanish Fiesta)
+- [ ] Redesign index.css: white/cream base, Spanish red (#C60B1E) and gold (#F1BF00), warm typography
+- [ ] Update PasswordGate: festive white/red/gold look with flamenco emojis
+- [ ] Update HeroSection: bright background, bold red/gold hero text, Spanish flag colors
+- [ ] Update StickyNav: white/cream nav bar with red accents
+- [ ] Update all section cards: cream/white cards with red/gold borders and accents
+- [ ] Add flamenco/Spain emojis throughout (💃🕺🇪🇸🌹🥂🎉🏟️)
+- [ ] Update badge colors to match new theme

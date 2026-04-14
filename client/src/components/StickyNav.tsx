@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
-  { id: "hero", label: "Home" },
-  { id: "itinerary", label: "Itinerary" },
-  { id: "flights", label: "Flights" },
-  { id: "airbnb", label: "Airbnb" },
-  { id: "crew", label: "The Crew" },
-  { id: "packing", label: "Packing" },
-  { id: "journal", label: "Journal" },
+  { id: "hero", label: "🏠 Home" },
+  { id: "itinerary", label: "🗓️ Itinerary" },
+  { id: "flights", label: "✈️ Flights" },
+  { id: "airbnb", label: "🏡 Airbnb" },
+  { id: "crew", label: "💃 The Crew" },
+  { id: "packing", label: "🧳 Packing" },
+  { id: "journal", label: "📸 Journal" },
 ];
 
 interface Props {
@@ -28,7 +28,7 @@ export default function StickyNav({ activeSection, onNavigate }: Props) {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg"
+          ? "bg-white/95 backdrop-blur-md border-b border-red-100 shadow-md shadow-red-900/5"
           : "bg-transparent"
       }`}
     >
@@ -38,10 +38,12 @@ export default function StickyNav({ activeSection, onNavigate }: Props) {
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
-              className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap ${
+              className={`flex-shrink-0 px-3 py-1.5 rounded-xl text-sm font-semibold transition-all duration-200 whitespace-nowrap ${
                 activeSection === item.id
-                  ? "bg-primary/20 text-primary border border-primary/40"
-                  : "text-muted-foreground hover:text-foreground hover:bg-card"
+                  ? "bg-red-600 text-white shadow-sm shadow-red-600/30"
+                  : scrolled
+                  ? "text-stone-500 hover:text-red-700 hover:bg-red-50"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
               }`}
             >
               {item.label}

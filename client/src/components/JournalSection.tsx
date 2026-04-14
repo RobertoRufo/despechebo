@@ -76,18 +76,18 @@ export default function JournalSection({ pin }: Props) {
   };
 
   return (
-    <section className="py-16 px-4">
+    <section className="py-16 px-4 bg-stone-50">
       <div className="max-w-3xl mx-auto">
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-gold-gradient mb-2">Trip Journal</h2>
-        <p className="text-muted-foreground text-sm mb-8">Share the best moments from Madrid 📸</p>
+        <h2 className="font-display text-3xl md:text-4xl font-black text-red-700 mb-2">📸 Trip Journal</h2>
+        <p className="text-stone-500 text-sm mb-8">Share the best moments from Madrid 🇸🇵</p>
 
         {/* Upload Form */}
-        <div className="bg-card border border-border rounded-2xl p-5 mb-10">
-          <p className="font-semibold text-foreground mb-4">Add a memory</p>
+        <div className="bg-white border border-stone-200 rounded-2xl p-5 mb-10 shadow-sm">
+          <p className="font-bold text-stone-800 mb-4">Add a memory</p>
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name selector */}
             <div>
-              <label className="text-xs text-muted-foreground uppercase tracking-wider block mb-2">Who are you?</label>              <div className="flex gap-2 flex-wrap">
+              <label className="text-xs text-stone-400 uppercase tracking-wider font-semibold block mb-2">Who are you?</label>              <div className="flex gap-2 flex-wrap">
                 {CREW_NAMES.map((name) => (
                   <button
                     key={name}
@@ -95,8 +95,8 @@ export default function JournalSection({ pin }: Props) {
                     onClick={() => setPosterName(name)}
                     className={`px-4 py-2 rounded-xl text-sm font-semibold border transition ${
                       posterName === name
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "border-border text-muted-foreground hover:border-primary hover:text-foreground"
+                        ? "bg-red-600 text-white border-red-600"
+                        : "border-stone-200 text-stone-500 hover:border-red-300 hover:text-red-700"
                     }`}
                   >
                     {name}
@@ -107,21 +107,21 @@ export default function JournalSection({ pin }: Props) {
 
             {/* Photo upload */}
             <div>
-              <label className="text-xs text-muted-foreground uppercase tracking-wider block mb-2">Photo</label>
+              <label className="text-xs text-stone-400 uppercase tracking-wider font-semibold block mb-2">Photo</label>
               {preview ? (
                 <div className="relative">
-                  <img src={preview} alt="Preview" className="w-full max-h-64 object-cover rounded-xl border border-border" />
+                  <img src={preview} alt="Preview" className="w-full max-h-64 object-cover rounded-xl border border-stone-200" />
                   <button
                     type="button"
                     onClick={() => { setFile(null); setPreview(null); if (fileRef.current) fileRef.current.value = ""; }}
-                    className="absolute top-2 right-2 bg-background/80 backdrop-blur rounded-full w-7 h-7 flex items-center justify-center text-foreground hover:bg-background transition text-sm"
+                    className="absolute top-2 right-2 bg-white/90 backdrop-blur rounded-full w-7 h-7 flex items-center justify-center text-stone-700 hover:bg-white transition text-sm"
                   >✕</button>
                 </div>
               ) : (
                 <button
                   type="button"
                   onClick={() => fileRef.current?.click()}
-                  className="w-full py-10 border-2 border-dashed border-border rounded-xl text-muted-foreground hover:border-primary hover:text-primary transition flex flex-col items-center gap-2"
+                  className="w-full py-10 border-2 border-dashed border-stone-200 rounded-xl text-stone-400 hover:border-red-400 hover:text-red-600 transition flex flex-col items-center gap-2"
                 >
                   <span className="text-3xl">📷</span>
                   <span className="text-sm">Tap to select a photo</span>
@@ -133,21 +133,21 @@ export default function JournalSection({ pin }: Props) {
 
             {/* Caption */}
             <div>
-              <label className="text-xs text-muted-foreground uppercase tracking-wider block mb-2">Caption (optional)</label>
+              <label className="text-xs text-stone-400 uppercase tracking-wider font-semibold block mb-2">Caption (optional)</label>
               <textarea
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
                 maxLength={500}
                 rows={2}
                 placeholder="What's happening here? 🎉"
-                className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-red-400 resize-none"
               />
             </div>
 
             <button
               type="submit"
               disabled={!file || uploading || createPost.isPending}
-              className="w-full bg-primary text-primary-foreground font-bold py-3.5 rounded-xl hover:opacity-90 active:scale-95 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-red-600 text-white font-bold py-3.5 rounded-xl hover:bg-red-700 active:scale-95 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {uploading || createPost.isPending ? "Uploading..." : "Post to Journal 🎉"}
             </button>
@@ -156,19 +156,19 @@ export default function JournalSection({ pin }: Props) {
 
         {/* Feed */}
         <div>
-          <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+          <p className="text-sm font-bold text-stone-400 uppercase tracking-wider mb-4">
             {posts.length > 0 ? `${posts.length} memor${posts.length !== 1 ? 'ies' : 'y'}` : "No memories yet — be the first to post!"}
           </p>
 
           {isLoading && (
             <div className="space-y-4">
-              {[...Array(2)].map((_, i) => <div key={i} className="h-64 bg-card rounded-2xl animate-pulse" />)}
+              {[...Array(2)].map((_, i) => <div key={i} className="h-64 bg-stone-100 rounded-2xl animate-pulse" />)}
             </div>
           )}
 
           <div className="space-y-5">
             {posts.map((post) => (
-              <div key={post.id} className="bg-card border border-border rounded-2xl overflow-hidden">
+              <div key={post.id} className="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm">
                 <img
                   src={post.photoUrl}
                   alt={post.caption ?? "Journal photo"}
@@ -177,20 +177,20 @@ export default function JournalSection({ pin }: Props) {
                 <div className="px-5 py-4">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <span className="bg-primary/20 text-primary text-xs font-bold px-3 py-1 rounded-full border border-primary/30">
+                      <span className="bg-red-50 text-red-700 text-xs font-bold px-3 py-1 rounded-full border border-red-200">
                         {post.posterName}
                       </span>
-                      <span className="text-muted-foreground text-xs">{formatDate(post.createdAt)}</span>
+                      <span className="text-stone-400 text-xs">{formatDate(post.createdAt)}</span>
                     </div>
                     <button
                       onClick={() => { if (confirm("Delete this post?")) deletePost.mutate({ pin, id: post.id }); }}
-                      className="text-muted-foreground hover:text-red-400 transition text-xs px-2 py-1 rounded border border-border hover:border-red-400"
+                      className="text-stone-400 hover:text-red-500 transition text-xs px-2 py-1 rounded border border-stone-200 hover:border-red-300"
                     >
                       Delete
                     </button>
                   </div>
                   {post.caption && (
-                    <p className="text-foreground text-sm leading-relaxed">{post.caption}</p>
+                    <p className="text-stone-700 text-sm leading-relaxed">{post.caption}</p>
                   )}
                 </div>
               </div>

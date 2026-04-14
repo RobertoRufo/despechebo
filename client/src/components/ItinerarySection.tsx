@@ -135,15 +135,15 @@ function AddItemForm({ dayIndex, pin, onDone }: AddFormProps) {
   });
 
   return (
-    <div className="bg-background border border-primary/30 rounded-xl p-4 mt-3 space-y-3">
-      <p className="text-sm font-semibold text-primary">Add new activity</p>
+    <div className="bg-red-50 border border-red-200 rounded-xl p-4 mt-3 space-y-3">
+      <p className="text-sm font-semibold text-red-700">Add new activity</p>
       <div className="grid grid-cols-2 gap-2">
-        <input className="col-span-2 bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Title *" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} />
-        <input className="bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Time (e.g. 9:00 PM)" value={form.time} onChange={e => setForm(f => ({ ...f, time: e.target.value }))} />
-        <input className="bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Venue" value={form.venue} onChange={e => setForm(f => ({ ...f, venue: e.target.value }))} />
-        <input className="col-span-2 bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Address" value={form.address} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} />
-        <input className="col-span-2 bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Google Maps URL" value={form.mapsUrl} onChange={e => setForm(f => ({ ...f, mapsUrl: e.target.value }))} />
-        <select className="col-span-2 bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary" value={form.badge} onChange={e => setForm(f => ({ ...f, badge: e.target.value as BadgeType }))}>
+        <input className="col-span-2 bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-red-400" placeholder="Title *" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} />
+        <input className="bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-red-400" placeholder="Time (e.g. 9:00 PM)" value={form.time} onChange={e => setForm(f => ({ ...f, time: e.target.value }))} />
+        <input className="bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-red-400" placeholder="Venue" value={form.venue} onChange={e => setForm(f => ({ ...f, venue: e.target.value }))} />
+        <input className="col-span-2 bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-red-400" placeholder="Address" value={form.address} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} />
+        <input className="col-span-2 bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-red-400" placeholder="Google Maps URL" value={form.mapsUrl} onChange={e => setForm(f => ({ ...f, mapsUrl: e.target.value }))} />
+        <select className="col-span-2 bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 focus:outline-none focus:ring-1 focus:ring-red-400" value={form.badge} onChange={e => setForm(f => ({ ...f, badge: e.target.value as BadgeType }))}>
           <option value="tbd">TBD</option>
           <option value="reservation_confirmed">🟢 Reservación Confirmada</option>
           <option value="hot">🔥 Hot</option>
@@ -186,15 +186,15 @@ function EditItemForm({ item, pin, onDone }: EditFormProps) {
   });
 
   return (
-    <div className="bg-background border border-primary/30 rounded-xl p-4 mt-2 space-y-3">
-      <p className="text-sm font-semibold text-primary">Edit activity</p>
+    <div className="bg-red-50 border border-red-200 rounded-xl p-4 mt-2 space-y-3">
+      <p className="text-sm font-semibold text-red-700">Edit activity</p>
       <div className="grid grid-cols-2 gap-2">
-        <input className="col-span-2 bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} />
-        <input className="bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Time" value={form.time} onChange={e => setForm(f => ({ ...f, time: e.target.value }))} />
-        <input className="bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Venue" value={form.venue} onChange={e => setForm(f => ({ ...f, venue: e.target.value }))} />
-        <input className="col-span-2 bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Address" value={form.address} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} />
-        <input className="col-span-2 bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Maps URL" value={form.mapsUrl} onChange={e => setForm(f => ({ ...f, mapsUrl: e.target.value }))} />
-        <select className="col-span-2 bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary" value={form.badge} onChange={e => setForm(f => ({ ...f, badge: e.target.value as BadgeType }))}>
+        <input className="col-span-2 bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 focus:outline-none focus:ring-1 focus:ring-red-400" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} />
+        <input className="bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-red-400" placeholder="Time" value={form.time} onChange={e => setForm(f => ({ ...f, time: e.target.value }))} />
+        <input className="bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-red-400" placeholder="Venue" value={form.venue} onChange={e => setForm(f => ({ ...f, venue: e.target.value }))} />
+        <input className="col-span-2 bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-red-400" placeholder="Address" value={form.address} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} />
+        <input className="col-span-2 bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-red-400" placeholder="Maps URL" value={form.mapsUrl} onChange={e => setForm(f => ({ ...f, mapsUrl: e.target.value }))} />
+        <select className="col-span-2 bg-white border border-stone-200 rounded-lg px-3 py-2 text-sm text-stone-800 focus:outline-none focus:ring-1 focus:ring-red-400" value={form.badge} onChange={e => setForm(f => ({ ...f, badge: e.target.value as BadgeType }))}>
           <option value="tbd">TBD</option>
           <option value="reservation_confirmed">🟢 Reservación Confirmada</option>
           <option value="hot">🔥 Hot</option>
