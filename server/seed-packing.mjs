@@ -1,8 +1,17 @@
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/mysql2";
-import { packingItems } from "../drizzle/schema.ts";
+import mysql from "mysql2/promise";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-const db = drizzle(process.env.DATABASE_URL);
+const connection = await mysql.createConnection(process.env.DATABASE_URL);
+
+// Check if already seeded
+const [rows] = await connection.query("SELECT COUNT(*) as cnt FROM packing_items");
+const count = rows[0].cnt;
+if (count > 0) {
+  console.log(`Already seeded (${count} packing items). Skipping.`);
+  await connection.end();
+  process.exit(0);
+}
 
 const DEFAULT_ITEMS = [
   // Documents
@@ -41,13 +50,12 @@ const DEFAULT_ITEMS = [
   { category: "Misc", text: "Eye mask & neck pillow", sortOrder: 43 },
 ];
 
-const rows = DEFAULT_ITEMS.map(item => ({
-  text: item.text,
-  category: item.category,
-  sortOrder: item.sortOrder,
-  checkedBy: null,
-}));
+for (const item of DEFAULT_ITEMS) {
+  await connection.query(
+    "INSERT INTO packing_items (text, category, sortOrder, checkedBy) VALUES (?, ?, ?, NULL)",
+    [item.text, item.category, item.sortOrder]
+  );
+}
 
-await db.insert(packingItems).values(rows);
-console.log(`Seeded ${rows.length} packing items.`);
-process.exit(0);
+console.log(`Seeded ${DEFAULT_ITEMS.length} packing items.`);
+await connection.end();
